@@ -1,0 +1,25 @@
+import mongoose from "mongoose";
+
+const userSchema= new mongoose.Schema({
+    firstName:{
+        type:String
+    },
+    lastName:{
+        type:String
+    },
+    emailId:{
+        type:String
+    },
+    password:{
+        type:String
+    },
+    age:{
+        type:Number
+    },
+    gender:{
+        type:String
+    }
+})
+
+// creating model 
+export const UserModel=mongoose.model("user",userSchema);
