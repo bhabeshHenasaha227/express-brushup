@@ -1,19 +1,21 @@
 import express from 'express';
-import {connectDb} from'./config/database.js';
+import { connectDb } from'./config/database.js';
 import { UserModel } from './models/user.js';
 
 const app = express();
 const port = 3000;
+app.use(express.json());
 
 app.post("/signup",async(req,res)=>{
-  const user={
-    firstName:"Virat".toLowerCase(),
-    lastName:"saha".toLowerCase(),
-    emailId:"virat@gmail.com",
-    password:"virat@123"
-  }
-  // creating a new instance of the userModel
-  const usermodel=new UserModel(user);
+  console.log(req.body);// say for example i have commented all code and provided this console. and from the postman i have send one request from body . it will throw undefined .thats why we need middlewire to convert our data to raw . so we have to use app.use as middle wire 
+  // const user={
+  //   firstName:"Virat".toLowerCase(),
+  //   lastName:"saha".toLowerCase(),
+  //   emailId:"virat@gmail.com",
+  //   password:"virat@123"
+  // }
+
+  const usermodel=new UserModel(req.body);  // creating a new instance of the userModel
   try{
     await usermodel.save();
   // very important response.send
