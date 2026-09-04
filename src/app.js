@@ -24,11 +24,12 @@ app.post("/signup", async (req, res) => {
     res.status(400).send("there is an error", error.message);
   }
 });
-// getting one user
+// getting one user by using Model.find({}) . difference between model.findOne({})
 app.get("/user", async (req, res) => {
   try {
     const userEmail = req.body.emailId;
     const user = await UserModel.find({ emailId: userEmail });
+    // const user = await UserModel.findOne();
     // console.log(user);
     if (user.length) {
       console.log(user);
