@@ -25,6 +25,28 @@ app.post("/signup",async(req,res)=>{
   }
   
 })
+// getting one user 
+app.get("/user",async(req,res)=>{
+  try{
+      const userEmail = req.body.emailId;
+      const user= await UserModel.find({emailId:userEmail})
+      // console.log(user);
+      if(user.length){
+        console.log(user);
+        res.send(user);
+      }else{
+        res.status(404).send("user not found")
+      }
+      
+  }catch(error){
+      res.status(400).send("there is an error",error.message)
+  }
+   
+
+})
+// app.get("/feed",(req,res)=>{
+  
+// })
 
 connectDb().then(()=>{
      console.log("database has been connected");
